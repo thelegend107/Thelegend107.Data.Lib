@@ -1,12 +1,10 @@
 ﻿using MapDataReader;
 using MySql.Data.MySqlClient;
-using apiV2.Entities;
-using apiV2.Helpers;
-using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
+using Thelegend107.MySQL.Data.Lib.Entities;
+using Thelegend107.MySQL.Data.Lib.Helpers;
 
-namespace apiV2.Services
+namespace Thelegend107.MySQL.Data.Lib.Services
 {
     public class EducationService
     {

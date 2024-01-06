@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace ResumeAPI.Helpers
+namespace Thelegend107.SQL.Data.Lib.Helpers
 {
     public static class ObjectToSQLHelper<T> where T : new()
     {

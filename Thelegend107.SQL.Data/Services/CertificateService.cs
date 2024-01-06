@@ -1,10 +1,10 @@
 ﻿using MapDataReader;
 using Microsoft.Data.SqlClient;
-using ResumeAPI.Entities;
-using ResumeAPI.Helpers;
 using System.Data;
+using Thelegend107.SQL.Data.Lib.Entities;
+using Thelegend107.SQL.Data.Lib.Helpers;
 
-namespace ResumeAPI.Services
+namespace Thelegend107.SQL.Data.Lib.Services
 {
     public class CertificateService
     {

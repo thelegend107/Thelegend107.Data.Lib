@@ -1,7 +1,7 @@
 ﻿using MapDataReader;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ResumeAPI.Entities
+namespace Thelegend107.SQL.Data.Lib.Entities
 {
     [GenerateDataReaderMapper]
     [Table("[dbo].[WorkExperienceItem]")]

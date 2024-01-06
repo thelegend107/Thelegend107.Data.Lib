@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thelegend107.MySQL.Data.Lib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thelegend107.SQL.Data.Lib", "Thelegend107.SQL.Data\Thelegend107.SQL.Data.Lib.csproj", "{CEDA6B64-7203-456E-83C2-9D613C36B539}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "thelegend107.SQL.Data.Lib.Test", "thelegend107.SQL.Data.Lib.Test\thelegend107.SQL.Data.Lib.Test.csproj", "{D6CE425E-A06D-4F37-80A3-7F794222942C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thelegend107.MySQL.Data.Lib.Test", "Thelegend107.MySQL.Data.Lib.Test\Thelegend107.MySQL.Data.Lib.Test.csproj", "{2746C7D7-CAFB-446E-8E7A-6AB305215AFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{CEDA6B64-7203-456E-83C2-9D613C36B539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDA6B64-7203-456E-83C2-9D613C36B539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDA6B64-7203-456E-83C2-9D613C36B539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6CE425E-A06D-4F37-80A3-7F794222942C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6CE425E-A06D-4F37-80A3-7F794222942C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6CE425E-A06D-4F37-80A3-7F794222942C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6CE425E-A06D-4F37-80A3-7F794222942C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2746C7D7-CAFB-446E-8E7A-6AB305215AFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2746C7D7-CAFB-446E-8E7A-6AB305215AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2746C7D7-CAFB-446E-8E7A-6AB305215AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2746C7D7-CAFB-446E-8E7A-6AB305215AFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

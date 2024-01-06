@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace apiV2.Helpers
+namespace Thelegend107.MySQL.Data.Lib.Helpers
 {
     public static class ObjectToSQLHelper<T> where T : new()
     {

@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace apiV2.Entities
+namespace Thelegend107.MySQL.Data.Lib.Entities
 {
     [GenerateDataReaderMapper]
     [Table("Certificate")]
