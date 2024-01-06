@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Moe Ayoub - SQL Data Library</Title>
+    <Authors>Moe Ayoub</Authors>
+    <Company>Moe Ayoub</Company>
+    <Description>TheLegend107 SQL Database library.</Description>
+    <Copyright>Copyright (c) $([System.DateTime]::Now.Year), Moe Ayoub</Copyright>
+    <IncludeSymbols>False</IncludeSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MapDataReader" Version="1.0.11" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>
