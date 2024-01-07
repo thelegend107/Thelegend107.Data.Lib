@@ -1,8 +1,10 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Thelegend107.MySQL.Data.Lib;
 using Thelegend107.MySQL.Data.Lib.Entities;
 using Thelegend107.MySQL.Data.Lib.Services;
 
@@ -22,15 +24,20 @@ namespace Thelegend107.Data.Lib.Test
         public MySQLTest()
         {
             IConfigurationRoot appSettings = new ConfigurationBuilder().AddJsonFile("local.settings.json").Build();
-            MySqlConnection sqlConnection = new MySqlConnection(appSettings["datawarehouseMySqlDb"]);
+            string? connectionString = appSettings["datawarehouseMySqlDb"];
 
-            _userService = new UserService(sqlConnection);
-            _addressService = new AddressService(sqlConnection);
-            _educationService = new EducationService(sqlConnection, _addressService);
-            _workExperienceService = new WorkExperienceService(sqlConnection, _addressService);
-            _skillService = new SkillService(sqlConnection);
-            _certificateService = new CertificateService(sqlConnection);
-            _linkService = new LinkService(sqlConnection);
+            if (connectionString == null)
+                throw new ArgumentNullException("Connection string is missing");
+
+            DatawarehouseContext dbContext = new DatawarehouseContext(connectionString);
+
+            _userService = new UserService(dbContext);
+            _addressService = new AddressService(dbContext);
+            _educationService = new EducationService(dbContext);
+            _workExperienceService = new WorkExperienceService(dbContext);
+            _skillService = new SkillService(dbContext);
+            _certificateService = new CertificateService(dbContext);
+            _linkService = new LinkService(dbContext);
         }
 
         [TestMethod]

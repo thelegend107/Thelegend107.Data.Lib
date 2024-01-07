@@ -1,33 +1,22 @@
-﻿using MapDataReader;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Thelegend107.MySQL.Data.Lib.Entities;
-using Thelegend107.MySQL.Data.Lib.Helpers;
 
 namespace Thelegend107.MySQL.Data.Lib.Services
 {
     public class CertificateService
     {
-        private readonly MySqlConnection _sqlConnection;
+        private readonly DatawarehouseContext dbContext;
 
-        public CertificateService(MySqlConnection MySqlConnection)
+        public CertificateService(DatawarehouseContext DatawarehouseContext)
         {
-            _sqlConnection = MySqlConnection;
+            this.dbContext = DatawarehouseContext;
         }
 
         public async Task<IEnumerable<Certificate>> RetrieveCertifcates(int userId)
         {
             List<Certificate> certificates = new List<Certificate>();
-
-            string sql = ObjectToSQLHelper<Certificate>.GenerateSelectQuery().ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                certificates = dataReader.ToCertificate();
-            }
-
+            certificates = await dbContext.Certificates.Where(x => x.UserId == userId).ToListAsync();
             return certificates;
         }
     }

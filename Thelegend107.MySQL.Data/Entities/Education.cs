@@ -1,11 +1,7 @@
-﻿using MapDataReader;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Thelegend107.MySQL.Data.Lib.Entities
 {
-    [GenerateDataReaderMapper]
     [Table("Education")]
     public partial class Education
     {
@@ -18,6 +14,6 @@ namespace Thelegend107.MySQL.Data.Lib.Entities
         public string? Grade { get; set; }
 
         public virtual Address? Address { get; set; }
-        public virtual IEnumerable<EducationItem> EducationItems { get; set; } = new List<EducationItem>();
+        public virtual ICollection<EducationItem> EducationItems { get; set; } = new List<EducationItem>();
     }
 }

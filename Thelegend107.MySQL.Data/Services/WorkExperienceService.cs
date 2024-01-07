@@ -1,60 +1,28 @@
-﻿using MapDataReader;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Thelegend107.MySQL.Data.Lib.Entities;
-using Thelegend107.MySQL.Data.Lib.Helpers;
 
 namespace Thelegend107.MySQL.Data.Lib.Services
 {
     public class WorkExperienceService
     {
-        private readonly MySqlConnection _sqlConnection;
-        private readonly AddressService _addressService;
+        private readonly DatawarehouseContext dbContext;
 
-        public WorkExperienceService(MySqlConnection MySqlConnection, AddressService addressService)
+        public WorkExperienceService(DatawarehouseContext datawarehouseContext)
         {
-            _sqlConnection = MySqlConnection;
-            _addressService = addressService;
+            this.dbContext = datawarehouseContext;
         }
 
         public async Task<IEnumerable<WorkExperience>> RetrieveWorkExperiences(int userId)
         {
             List<WorkExperience> workExperiences = new List<WorkExperience>();
-
-            string sql = ObjectToSQLHelper<WorkExperience>.GenerateSelectQuery().ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                workExperiences = dataReader.ToWorkExperience();
-            }
-
-            Parallel.ForEach(workExperiences, workExperience =>
-            {
-                workExperience.Address = _addressService.RetrieveAddressById(workExperience.AddressId).Result;
-                workExperience.WorkExperienceItems = RetrieveWorkExperienceItems(workExperience.Id).Result;
-            });
+            workExperiences = await dbContext.WorkExperiences.Where(x => x.UserId == userId)
+                .Include(x => x.Address).ThenInclude(x => x != null ? x.Country : null)
+                .Include(x => x.Address).ThenInclude(x => x != null ? x.State : null)
+                .Include(x => x.WorkExperienceItems)
+                .ToListAsync();
 
             return workExperiences;
-        }
-
-        private async Task<IEnumerable<WorkExperienceItem>> RetrieveWorkExperienceItems(int workExperienceId)
-        {
-            List<WorkExperienceItem> workExperienceItems = new List<WorkExperienceItem>();
-
-            string sql = ObjectToSQLHelper<WorkExperienceItem>.GenerateSelectQuery()
-                .AppendLine($"WHERE WorkExperienceId = {workExperienceId}")
-                .ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                workExperienceItems = dataReader.ToWorkExperienceItem();
-            }
-
-            return workExperienceItems;
         }
     }
 }

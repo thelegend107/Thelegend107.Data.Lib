@@ -1,9 +1,7 @@
-﻿using MapDataReader;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Thelegend107.MySQL.Data.Lib.Entities
 {
-    [GenerateDataReaderMapper]
     [Table("EducationItem")]
     public partial class EducationItem
     {

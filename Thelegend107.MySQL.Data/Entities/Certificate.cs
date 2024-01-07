@@ -1,10 +1,7 @@
-﻿using MapDataReader;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Thelegend107.MySQL.Data.Lib.Entities
 {
-    [GenerateDataReaderMapper]
     [Table("Certificate")]
     public partial class Certificate
     {

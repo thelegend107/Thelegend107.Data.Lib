@@ -1,11 +1,7 @@
-﻿using MapDataReader;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Thelegend107.MySQL.Data.Lib.Entities
 {
-    [GenerateDataReaderMapper]
     [Table("WorkExperience")]
     public partial class WorkExperience
     {
@@ -19,6 +15,6 @@ namespace Thelegend107.MySQL.Data.Lib.Entities
         public decimal? PayRate { get; set; }
 
         public virtual Address? Address { get; set; }
-        public virtual IEnumerable<WorkExperienceItem> WorkExperienceItems { get; set;} = new List<WorkExperienceItem>();
+        public virtual ICollection<WorkExperienceItem> WorkExperienceItems { get; set; } = new List<WorkExperienceItem>();
     }
 }

@@ -1,60 +1,28 @@
-﻿using MapDataReader;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Thelegend107.MySQL.Data.Lib.Entities;
-using Thelegend107.MySQL.Data.Lib.Helpers;
 
 namespace Thelegend107.MySQL.Data.Lib.Services
 {
     public class EducationService
     {
-        private readonly MySqlConnection _sqlConnection;
-        private readonly AddressService _addressService;
+        private readonly DatawarehouseContext dbContext;
 
-        public EducationService(MySqlConnection MySqlConnection, AddressService addressService)
+        public EducationService(DatawarehouseContext datawarehouseContext)
         {
-            _sqlConnection = MySqlConnection;
-            _addressService = addressService;
+            this.dbContext = datawarehouseContext;
         }
 
         public async Task<IEnumerable<Education>> RetrieveEducations(int userId)
         {
             List<Education> educations = new List<Education>();
-
-            string sql = ObjectToSQLHelper<Education>.GenerateSelectQuery().ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                educations = dataReader.ToEducation();
-            }
-
-            Parallel.ForEach(educations, education =>
-            {
-                education.Address = _addressService.RetrieveAddressById(education.AddressId).Result;
-                education.EducationItems = RetrieveEducationItems(education.Id).Result;
-            });
+            educations = await dbContext.Educations.Where(x => x.UserId == userId)
+                .Include(x => x.Address).ThenInclude(x => x != null ? x.Country : null)
+                .Include(x => x.Address).ThenInclude(x => x != null ? x.State : null)
+                .Include(x => x.EducationItems)
+                .ToListAsync();
 
             return educations;
-        }
-
-        private async Task<IEnumerable<EducationItem>> RetrieveEducationItems(int educationId)
-        {
-            List<EducationItem> educationItems = new List<EducationItem>();
-
-            string sql = ObjectToSQLHelper<EducationItem>.GenerateSelectQuery()
-                .AppendLine($"WHERE EducationId = {educationId}")
-                .ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                educationItems = dataReader.ToEducationItem();
-            }
-
-            return educationItems;
         }
     }
 }

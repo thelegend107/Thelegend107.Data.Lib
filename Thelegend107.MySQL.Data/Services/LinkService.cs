@@ -1,33 +1,22 @@
-﻿using MapDataReader;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Thelegend107.MySQL.Data.Lib.Entities;
-using Thelegend107.MySQL.Data.Lib.Helpers;
 
 namespace Thelegend107.MySQL.Data.Lib.Services
 {
     public class LinkService
     {
-        private readonly MySqlConnection _sqlConnection;
+        private readonly DatawarehouseContext dbContext;
 
-        public LinkService(MySqlConnection MySqlConnection)
+        public LinkService(DatawarehouseContext datawarehouseContext)
         {
-            _sqlConnection = MySqlConnection;
+            this.dbContext = datawarehouseContext;
         }
 
         public async Task<IEnumerable<Link>> RetrieveLinks(int userId)
         {
             List<Link> links = new List<Link>();
-
-            string sql = ObjectToSQLHelper<Link>.GenerateSelectQuery().ToString();
-
-            using (MySqlConnection MySqlConnection = new MySqlConnection(_sqlConnection.ConnectionString))
-            {
-                MySqlConnection.Open();
-                IDataReader dataReader = await new MySqlCommand(sql, MySqlConnection).ExecuteReaderAsync();
-                links = dataReader.ToLink();
-            }
-
+            links = await dbContext.Links.Where(x => x.UserId == userId).ToListAsync();
             return links;
         }
     }
