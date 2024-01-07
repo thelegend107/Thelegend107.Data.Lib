@@ -11,12 +11,30 @@
     <Description>TheLegend107 MySQL Database library.</Description>
     <Copyright>Copyright (c) $([System.DateTime]::Now.Year), Moe Ayoub</Copyright>
     <IncludeSymbols>False</IncludeSymbols>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Packages</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Packages</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MapDataReader" Version="1.0.11" />
     <PackageReference Include="MySql.Data" Version="8.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
