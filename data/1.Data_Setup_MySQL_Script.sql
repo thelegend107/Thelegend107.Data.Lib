@@ -1,54 +1,17 @@
-IF OBJECT_ID('Skill', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Skill`;
-
-IF OBJECT_ID('Certificate', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Certificate`;
-
-IF OBJECT_ID('Link', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Link`;
-
-IF OBJECT_ID('EducationItem', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `EducationItem`;
-
-IF OBJECT_ID('Education', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Education`;
-
-IF OBJECT_ID('WorkExperienceItem', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `WorkExperienceItem`;
-
-IF OBJECT_ID('WorkExperience', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `WorkExperience`;
-
-IF OBJECT_ID('User', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `User`;
-
-IF OBJECT_ID('Address', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Address`;
-
-IF OBJECT_ID('State', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `State`;
-
-IF OBJECT_ID('Country', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Country`;
-
-IF OBJECT_ID('SubRegion', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `SubRegion`;
-
-IF OBJECT_ID('Region', THEN 'U'END IF;
-
-) IS NOT NULL DROP TABLE `Region`;
+DROP TABLE IF EXISTS Skill;
+DROP TABLE IF EXISTS Certificate;
+DROP TABLE IF EXISTS Link;
+DROP TABLE IF EXISTS EducationItem;
+DROP TABLE IF EXISTS Education;
+DROP TABLE IF EXISTS WorkExperienceItem;
+DROP TABLE IF EXISTS WorkExperience;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Address;
+DROP TABLE IF EXISTS State;
+DROP TABLE IF EXISTS Country;
+DROP TABLE IF EXISTS SubRegion;
+DROP TABLE IF EXISTS Region;
 
 CREATE TABLE Region (
     Id INT AUTO_INCREMENT NOT NULL,
@@ -103,11 +66,25 @@ CREATE TABLE `Address` (
     Address1 LONGTEXT NOT NULL,
     Address2 LONGTEXT NULL,
     City LONGTEXT NULL,
+    PostalCode LONGTEXT NULL,
     StateId INT NOT NULL,
     CountryId INT NOT NULL,
     PRIMARY KEY (Id),
     CONSTRAINT fk_State_Address FOREIGN KEY (StateId) REFERENCES `State`(Id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_Country_Address FOREIGN KEY (CountryId) REFERENCES `Country`(Id)
+);
+
+CREATE TABLE `User`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    AddressId INT NULL,
+    Title LONGTEXT NOT NULL,
+    FirstName LONGTEXT NOT NULL,
+    LastName LONGTEXT NOT NULL,
+    Email LONGTEXT NOT NULL,
+    PhoneNumber LONGTEXT NULL,
+    Description LONGTEXT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Address_User FOREIGN KEY (AddressId) REFERENCES `Address`(Id)
 );
 
 CREATE TABLE `Customer`(
