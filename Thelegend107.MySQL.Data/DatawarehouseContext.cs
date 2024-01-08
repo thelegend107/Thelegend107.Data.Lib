@@ -3,23 +3,16 @@ using Thelegend107.MySQL.Data.Lib.Entities;
 
 namespace Thelegend107.MySQL.Data.Lib
 {
-    public class DatawarehouseContext : DbContext
+    public class DatawarehouseContext(DbContextOptions options) : DbContext(options)
     {
-        public readonly string connectionString;
-
-        public DatawarehouseContext(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySQL(this.connectionString);
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+            });
 
             modelBuilder.Entity<Address>(entity =>
             {
@@ -45,6 +38,7 @@ namespace Thelegend107.MySQL.Data.Lib
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<EducationItem> EducationItems { get; set; }

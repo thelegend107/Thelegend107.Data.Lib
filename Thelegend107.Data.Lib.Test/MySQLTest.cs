@@ -14,6 +14,7 @@ namespace Thelegend107.Data.Lib.Test
     public class MySQLTest
     {
         private readonly UserService _userService;
+        private readonly CustomerService _customerService;
         private readonly AddressService _addressService;
         private readonly EducationService _educationService;
         private readonly WorkExperienceService _workExperienceService;
@@ -21,17 +22,24 @@ namespace Thelegend107.Data.Lib.Test
         private readonly CertificateService _certificateService;
         private readonly LinkService _linkService;
 
-        public MySQLTest()
+        private static DbContextOptions DbContextInit()
         {
             IConfigurationRoot appSettings = new ConfigurationBuilder().AddJsonFile("local.settings.json").Build();
             string? connectionString = appSettings["datawarehouseMySqlDb"];
 
             if (connectionString == null)
-                throw new ArgumentNullException("Connection string is missing");
+                throw new ApplicationException("Connection string is missing");
 
-            DatawarehouseContext dbContext = new DatawarehouseContext(connectionString);
+            DbContextOptions contextOptions = new DbContextOptionsBuilder<DatawarehouseContext>().UseMySQL(connectionString).Options;
+            return contextOptions;
+        }
+
+        public MySQLTest()
+        {
+            DatawarehouseContext dbContext = new DatawarehouseContext(DbContextInit());
 
             _userService = new UserService(dbContext);
+            _customerService = new CustomerService(dbContext);
             _addressService = new AddressService(dbContext);
             _educationService = new EducationService(dbContext);
             _workExperienceService = new WorkExperienceService(dbContext);
@@ -47,6 +55,35 @@ namespace Thelegend107.Data.Lib.Test
 
             Debug.WriteLine(JsonConvert.SerializeObject(user, Formatting.Indented));
             Assert.IsNotNull(user);
+        }
+
+        [TestMethod]
+        public void Can_Get_Customer()
+        {
+            Customer? customer = _customerService.RetrieveCustomerByEmail("mma.ayoub@outlook.com").Result;
+
+            Debug.WriteLine(JsonConvert.SerializeObject(customer, Formatting.Indented));
+            Assert.IsNotNull(customer);
+        }
+
+        [TestMethod]
+        public void Can_Create_Customer()
+        {
+            Customer customer = new Customer() 
+            {
+                Company = "TheLegend107",
+                FirstName = "Moe",
+                LastName = "Ayoub",
+                Email = "mma.ayoub@outlook.com",
+                Password = "password",
+                PhoneNumber = "1234567890",
+                IsAdmin = true,
+            };
+
+            customer = _customerService.CreateNewCustomer(customer).Result;
+
+            Debug.WriteLine(JsonConvert.SerializeObject(customer, Formatting.Indented));
+            Assert.IsNotNull(customer.Id);
         }
 
         [TestMethod]

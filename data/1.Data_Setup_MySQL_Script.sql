@@ -1,0 +1,198 @@
+IF OBJECT_ID('Skill', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Skill`;
+
+IF OBJECT_ID('Certificate', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Certificate`;
+
+IF OBJECT_ID('Link', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Link`;
+
+IF OBJECT_ID('EducationItem', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `EducationItem`;
+
+IF OBJECT_ID('Education', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Education`;
+
+IF OBJECT_ID('WorkExperienceItem', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `WorkExperienceItem`;
+
+IF OBJECT_ID('WorkExperience', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `WorkExperience`;
+
+IF OBJECT_ID('User', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `User`;
+
+IF OBJECT_ID('Address', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Address`;
+
+IF OBJECT_ID('State', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `State`;
+
+IF OBJECT_ID('Country', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Country`;
+
+IF OBJECT_ID('SubRegion', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `SubRegion`;
+
+IF OBJECT_ID('Region', THEN 'U'END IF;
+
+) IS NOT NULL DROP TABLE `Region`;
+
+CREATE TABLE Region (
+    Id INT AUTO_INCREMENT NOT NULL,
+    NAME NVARCHAR(50) NOT NULL,
+    PRIMARY KEY (Id)
+);
+
+CREATE TABLE SubRegion (
+    Id INT AUTO_INCREMENT NOT NULL,
+    RegionId INT,
+    NAME NVARCHAR(50) NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Region_SubRegion FOREIGN KEY (RegionId) REFERENCES `Region`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Country (
+    Id INT AUTO_INCREMENT NOT NULL,
+    RegionId INT NULL,
+    SubRegionId INT NULL,
+    NAME NVARCHAR(50) NOT NULL,
+    NativeName NVARCHAR(100) NULL,
+    ISO3 NVARCHAR(3) NOT NULL,
+    ISO2 NVARCHAR(2) NOT NULL,
+    NumericCode INT NOT NULL,
+    PhoneCode NVARCHAR(50) NOT NULL,
+    Capital NVARCHAR(50) NULL,
+    Currency NVARCHAR(50) NOT NULL,
+    CurrencyName NVARCHAR(50) NOT NULL,
+    CurrencySymbol NVARCHAR(50) NOT NULL,
+    Tld NVARCHAR(50) NOT NULL,
+    Latitude DOUBLE NULL,
+    Longitude DOUBLE NULL,
+    Emoji NVARCHAR(50),
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Region_Country FOREIGN KEY (RegionId) REFERENCES `Region`(Id),
+    CONSTRAINT fk_SubRegion_Country FOREIGN KEY (SubRegionId) REFERENCES `SubRegion`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE State (
+    Id INT AUTO_INCREMENT NOT NULL,
+    CountryId INT NOT NULL,
+    StateCode NVARCHAR(50) NOT NULL,
+    NAME NVARCHAR(100) NOT NULL,
+    Latitude DOUBLE NULL,
+    Longitude DOUBLE NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Country_State FOREIGN KEY (CountryId) REFERENCES `Country`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Address` (
+    Id INT AUTO_INCREMENT NOT NULL,
+    Address1 LONGTEXT NOT NULL,
+    Address2 LONGTEXT NULL,
+    City LONGTEXT NULL,
+    StateId INT NOT NULL,
+    CountryId INT NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_State_Address FOREIGN KEY (StateId) REFERENCES `State`(Id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_Country_Address FOREIGN KEY (CountryId) REFERENCES `Country`(Id)
+);
+
+CREATE TABLE `Customer`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    AddressId INT NULL,
+    Company varchar(25) NULL,
+    FirstName varchar(25) NOT NULL,
+    LastName varchar(25) NOT NULL,
+    Email LONGTEXT NOT NULL,
+    PhoneNumber varchar(20) NULL,
+    Password LONGTEXT NOT NULL,
+    IsAdmin bool NOT NULL DEFAULT false,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Address_fakeStore_User FOREIGN KEY (AddressId) REFERENCES `Address`(Id)
+);
+
+CREATE TABLE `WorkExperience`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    UserId INT NOT NULL,
+    AddressId INT NULL,
+    Employer LONGTEXT NOT NULL,
+    Title LONGTEXT NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    PayRate DECIMAL(18, 0) NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Address_WorkExperience FOREIGN KEY (AddressId) REFERENCES `Address`(Id),
+    CONSTRAINT fk_User_WorkExperience FOREIGN KEY (UserId) REFERENCES `User`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `WorkExperienceItem`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    WorkExperienceId INT NOT NULL,
+    Description LONGTEXT NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_WorkExperience_WorkExperienceItem FOREIGN KEY (WorkExperienceId) REFERENCES `WorkExperience`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Education`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    UserId INT NOT NULL,
+    AddressId INT NULL,
+    School LONGTEXT NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NOT NULL,
+    Grade LONGTEXT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_User_Education FOREIGN KEY (UserId) REFERENCES `User`(Id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_Address_Education FOREIGN KEY (AddressId) REFERENCES `Address`(Id)
+);
+
+CREATE TABLE `EducationItem`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    EducationId INT NOT NULL,
+    NAME LONGTEXT NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_Education_EducationItem FOREIGN KEY (EducationId) REFERENCES `Education`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Skill`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    UserId INT NOT NULL,
+    TYPE LONGTEXT NOT NULL,
+    NAME LONGTEXT NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_User_Skill FOREIGN KEY (UserId) REFERENCES `User`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Certificate`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    UserId INT NOT NULL,
+    NAME LONGTEXT NOT NULL,
+    CertificateId LONGTEXT NULL,
+    URL LONGTEXT NULL,
+    IssuedBy LONGTEXT NULL,
+    IssueDate DATE NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_User_Certificate FOREIGN KEY (UserId) REFERENCES `User`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Link`(
+    Id INT AUTO_INCREMENT NOT NULL,
+    UserId INT NOT NULL,
+    NAME LONGTEXT NOT NULL,
+    URL LONGTEXT NOT NULL,
+    PRIMARY KEY (Id),
+    CONSTRAINT fk_User_Link FOREIGN KEY (UserId) REFERENCES `User`(Id) ON DELETE CASCADE ON UPDATE CASCADE
+);
