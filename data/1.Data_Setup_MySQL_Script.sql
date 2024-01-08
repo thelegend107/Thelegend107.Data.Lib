@@ -98,7 +98,7 @@ CREATE TABLE `Customer`(
     Password LONGTEXT NOT NULL,
     IsAdmin bool NOT NULL DEFAULT false,
     PRIMARY KEY (Id),
-    CONSTRAINT fk_Address_fakeStore_User FOREIGN KEY (AddressId) REFERENCES `Address`(Id)
+    CONSTRAINT fk_Address_Customer FOREIGN KEY (AddressId) REFERENCES `Address`(Id)
 );
 
 CREATE TABLE `WorkExperience`(
