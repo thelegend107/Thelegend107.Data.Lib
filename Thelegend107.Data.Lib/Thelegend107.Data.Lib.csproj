@@ -15,7 +15,7 @@
     <IncludeSymbols>False</IncludeSymbols>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Packages</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Packages</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-Nuget-Package</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
