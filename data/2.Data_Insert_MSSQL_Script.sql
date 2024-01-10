@@ -33,7 +33,7 @@ INSERT INTO SubRegion(Name,RegionId) VALUES
 ,('Polynesia',5);
 GO
 
-INSERT INTO Country(Name,ISO3,ISO2,NumericCode,PhoneCode,Capital,Currency,CurrencyName,CurrencySymbol,Tld,NativeName,RegionId,SubregionId,Latitude,Longitude,Emoji) VALUES
+INSERT INTO Country(Name,ISO3,ISO2,NumericCode,PhoneCode,Capital,Currency,CurrencyName,CurrencySymbol,Tld,NativeName,RegionId,SubRegionId,Latitude,Longitude,Emoji) VALUES
  ('Afghanistan','AFG','AF',004,'93','Kabul','AFN','Afghan afghani','؋','.af','افغانستان',3,14,33.00000000,65.00000000,N'🇦🇫')
 ,('Aland Islands','ALA','AX',248,'+358-18','Mariehamn','EUR','Euro','€','.ax','Åland',4,18,60.11666700,19.90000000,N'🇦🇽')
 ,('Albania','ALB','AL',008,'355','Tirana','ALL','Albanian lek','Lek','.al','Shqipëria',4,16,41.00000000,20.00000000,N'🇦🇱')
@@ -5378,18 +5378,18 @@ INSERT INTO State(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(157,'Loyalty Islands Province','03',-20.96670000,167.23330000);
 GO
 
-INSERT INTO Address(Address1, Address2, City, CountryId, StateId) VALUES
- ('2421 E Irwin St', null, 'Pierre', 233, 1391)
-,('1451 Stadium Rd', null, 'Brookings', 233, 1391)
-,('1601 University Blvd', null, 'Brookings', 233, 1391)
-,('3200 W Sencore Dr', null, 'Sioux Falls', 233, 1391)
-,('201 Daktronics Dr', null, 'Brookings', 233, 1391)
-,('7901 Stoneridge Dr', null, 'Pleasanton', 233, 1362)
-,('205 E 6th St', null, 'Sioux Falls', 233, 1391);
+INSERT INTO Address(Address1, Address2, City, PostalCode, CountryId, StateId) VALUES
+ ('2421 E Irwin St', null, 'Pierre', 57501, 233, 1391)
+,('1451 Stadium Rd', null, 'Brookings', 57006, 233, 1391)
+,('1601 University Blvd', null, 'Brookings', 57006, 233, 1391)
+,('3200 W Sencore Dr', null, 'Sioux Falls', 57104, 233, 1391)
+,('201 Daktronics Dr', null, 'Brookings', 57006, 233, 1391)
+,('7901 Stoneridge Dr', null, 'Pleasanton', 94588, 233, 1362)
+,('205 E 6th St', null, 'Sioux Falls', 57104, 233, 1391);
 GO
 
 INSERT INTO [dbo].[User](AddressId, Title, FirstName, LastName, Email, PhoneNumber, Description) VALUES
- (1, 'Software Developer', 'Moe', 'Ayoub', 'mma.ayoub@outlook.com', '+16057405024', 'As a Software Developer at Raven Industries, I was the product owner and main contributor to our E-Commerce web site for the Agricultural Division. I also integrated our web site, CRM, ERP, and IT ticketing systems using various technologies, such as C#, Azure, Boomi, and Oracle. I graduated from South Dakota State University with a BSEE degree in 2020, where I designed and built a device that can reconfigure the network settings of display controllers for Daktronics. I have a strong background in electrical and electronics engineering, as well as object-oriented programming and web development. I am passionate about creating innovative and user-friendly solutions that enhance the performance and efficiency of complex systems.');
+ (1, 'Full Stack Developer', 'Moe', 'Ayoub', 'mma.ayoub@outlook.com', '+16057405024', 'As a Full Stack Developer at my previous employer, I was the product owner and main contributor to our E-Commerce web site for the Agricultural Division. I also integrated our web site, CRM, ERP, and IT ticketing systems using various technologies, such as C#, Azure, Boomi, and Oracle. I graduated from South Dakota State University with a BSEE degree in 2020, where I designed and built a device that can reconfigure the network settings of display controllers for Daktronics. I have a strong background in electrical and electronics engineering, as well as object-oriented programming and web development. I am passionate about creating innovative and user-friendly solutions that enhance the performance and efficiency of complex systems.');
 GO
 
 INSERT INTO WorkExperience(UserId, AddressId, Employer, Title, StartDate, EndDate, PayRate) VALUES
@@ -5461,6 +5461,7 @@ INSERT INTO Skill (UserId, Type, Name) VALUES
 ,(1, 'Database', 'Oracle SQL')
 ,(1, 'Database', 'Microsoft SQL')
 ,(1, 'Database', 'MySQL')
+,(1, 'Database', 'PostgreSQL')
 ,(1, 'Database', 'NoSQL')
 ,(1, 'ERP/CRM Platforms', 'Salesforce')
 ,(1, 'ERP/CRM Platforms', 'IFS');
@@ -5480,7 +5481,6 @@ GO
 INSERT INTO Link(UserId, Name, URL) VALUES
  (1, 'LinkedIn', 'https://www.linkedin.com/in/mhayoub/')
 ,(1, 'GitHub', 'https://github.com/thelegend107')
---,(1, 'Gravatar', 'https://gravatar.com/mmaayoub')
 ,(1, 'Salesforce', 'https://www.salesforce.com/trailblazer/thelegend107')
 ,(1, 'PDF', 'https://moeayoubresumepdf.tiiny.site');
 GO

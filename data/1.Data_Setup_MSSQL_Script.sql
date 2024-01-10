@@ -3,10 +3,6 @@ USE [datawarehouse];
 GO
 
 -- Drop tables if exists
-IF OBJECT_ID(N'dbo.File', N'U') IS NOT NULL  
-   DROP TABLE [dbo].[File];
-GO
-
 IF OBJECT_ID(N'dbo.Skill', N'U') IS NOT NULL  
    DROP TABLE [dbo].[Skill];
 GO
@@ -109,6 +105,7 @@ CREATE TABLE [dbo].[Address] (
     Address1 nvarchar(max) NOT NULL,
     Address2 nvarchar(max) NULL,
     City nvarchar(max) NULL,
+    PostalCode nvarchar(max) NULL,
     StateId int not null CONSTRAINT fk_State_Address FOREIGN KEY REFERENCES [dbo].[State](Id) ON DELETE CASCADE ON UPDATE CASCADE,
     CountryId int not null CONSTRAINT fk_Country_Address FOREIGN KEY REFERENCES [dbo].[Country](Id)
 );
@@ -125,6 +122,18 @@ CREATE TABLE [dbo].[User](
     Description NVARCHAR(MAX) NULL
 );
 GO
+
+CREATE TABLE [dbo].[Customer](
+    Id INT IDENTITY(1, 1) NOT NULL CONSTRAINT pk_Customer PRIMARY KEY CLUSTERED,
+    AddressId INT NULL CONSTRAINT fk_Address_Customer FOREIGN KEY (AddressId) REFERENCES [dbo].[Address](Id),
+    Company NVARCHAR(25) NULL,
+    FirstName NVARCHAR(25) NOT NULL,
+    LastName NVARCHAR(25) NOT NULL,
+    Email NVARCHAR(max) NOT NULL,
+    PhoneNumber varchar(20) NULL,
+    Password NVARCHAR(max) NOT NULL,
+    IsAdmin bit NOT NULL DEFAULT 0
+);
 
 CREATE TABLE [dbo].[WorkExperience](
     Id INT IDENTITY(1, 1) NOT NULL CONSTRAINT pk_WorkExperience PRIMARY KEY CLUSTERED,
@@ -187,11 +196,4 @@ CREATE TABLE [dbo].[Link](
     UserId INT NOT NULL CONSTRAINT fk_User_Link FOREIGN KEY REFERENCES [dbo].[User](Id) ON DELETE CASCADE ON UPDATE CASCADE,
     Name NVARCHAR(MAX) NOT NULL,
     URL NVARCHAR(MAX) NOT NULL
-);
-
-CREATE TABLE [dbo].[File](
-	Id INT IDENTITY(1, 1) NOT NULL CONSTRAINT pk_File PRIMARY KEY CLUSTERED,
-	UserId INT NOT NULL CONSTRAINT fk_User_File FOREIGN KEY REFERENCES [dbo].[User](Id),
-	Name NVARCHAR(MAX) NOT NULL,
-	Data NVARCHAR(MAX) NOT NULL
 );

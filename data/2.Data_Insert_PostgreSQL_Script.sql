@@ -1,4 +1,4 @@
-INSERT INTO "Region"(Name) VALUES
+INSERT INTO "Region"("Name") VALUES
  ('Africa')
 ,('Americas')
 ,('Asia')
@@ -6,7 +6,7 @@ INSERT INTO "Region"(Name) VALUES
 ,('Oceania')
 ,('Polar');
 
-INSERT INTO "SubRegion"(Name,RegionId) VALUES
+INSERT INTO "SubRegion"("Name","RegionId") VALUES
  ('Northern Africa',1)
 ,('Middle Africa',1)
 ,('Western Africa',1)
@@ -30,7 +30,7 @@ INSERT INTO "SubRegion"(Name,RegionId) VALUES
 ,('Micronesia',5)
 ,('Polynesia',5);
 
-INSERT INTO "Country"(Name,ISO3,ISO2,NumericCode,PhoneCode,Capital,Currency,CurrencyName,CurrencySymbol,Tld,NativeName,RegionId,SubregionId,Latitude,Longitude,Emoji) VALUES
+INSERT INTO "Country"("Name","ISO3","ISO2","NumericCode","PhoneCode","Capital","Currency","CurrencyName","CurrencySymbol","Tld","NativeName","RegionId","SubRegionId","Latitude","Longitude","Emoji") VALUES
  ('Afghanistan','AFG','AF',004,'93','Kabul','AFN','Afghan afghani','؋','.af','افغانستان',3,14,33.00000000,65.00000000,'🇦🇫')
 ,('Aland Islands','ALA','AX',248,'+358-18','Mariehamn','EUR','Euro','€','.ax','Åland',4,18,60.11666700,19.90000000,'🇦🇽')
 ,('Albania','ALB','AL',008,'355','Tirana','ALL','Albanian lek','Lek','.al','Shqipëria',4,16,41.00000000,20.00000000,'🇦🇱')
@@ -282,7 +282,7 @@ INSERT INTO "Country"(Name,ISO3,ISO2,NumericCode,PhoneCode,Capital,Currency,Curr
 ,('Curaçao','CUW','CW',531,'599','Willemstad','ANG','Netherlands Antillean guilder','ƒ','.cw','Curaçao',2,7,12.11666700,-68.93333300,'🇨🇼')
 ,('Sint Maarten (Dutch part)','SXM','SX',534,'1721','Philipsburg','ANG','Netherlands Antillean guilder','ƒ','.sx','Sint Maarten',2,7,18.03333300,-63.05000000,'🇸🇽');
  
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (70,'Southern Nations, Nationalities, and Peoples'' Region','SN',6.51569110,36.95410700)
 ,(70,'Somali Region','SO',6.66122930,43.79084530)
 ,(70,'Amhara Region','AM',11.34942470,37.97845850)
@@ -1284,7 +1284,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(165,'Trøndelag','50',63.54201250,10.93692670)
 ,(165,'Oslo','03',59.91386880,10.75224540);
 
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (165,'Innlandet','34',61.19357870,5.50832660)
 ,(165,'Viken','30',59.96530050,7.45051440)
 ,(165,'Svalbard','21',77.87497250,20.97518210)
@@ -2286,7 +2286,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(154,'Rapti Zone','RA',28.27434700,82.38857830)
 ,(154,'Seti Zone','SE',29.69054270,81.33994140);
 
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (154,'Karnali Zone','KA',29.38625550,82.38857830)
 ,(154,'Dhaulagiri Zone','DH',28.61117600,83.50702030)
 ,(154,'Gandaki Zone','GA',28.37320370,84.43827210)
@@ -3288,7 +3288,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(24,'Littoral Department','LI',6.38069730,2.44063870)
 ,(131,'Machinga District','MH',-14.94072630,35.47819260);
 
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (131,'Zomba District','ZO',-15.37658570,35.33565180)
 ,(131,'Mwanza District','MW',-2.46711970,32.89868120)
 ,(131,'Nsanje District','NS',-16.72882020,35.17087410)
@@ -4290,7 +4290,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(62,'Independencia','10',32.63357480,-115.42892940)
 ,(62,'San Juan Province','22',-31.52871270,-68.53604030);
 
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (62,'Monseñor Nouel Province','28',18.92152340,-70.38368150)
 ,(62,'Santiago Rodríguez Province','26',19.47131810,-71.33958010)
 ,(62,'Pedernales Province','16',17.85376260,-71.33032090)
@@ -5292,7 +5292,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(178,'Barceloneta','017',41.38010610,2.18969570)
 ,(178,'Barranquitas','019',18.18662420,-66.30628020);
 
-INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
+INSERT INTO "State"("CountryId","Name","StateCode","Latitude","Longitude") VALUES
  (178,'Bayamón','021',18.38939600,-66.16532240)
 ,(178,'Cabo Rojo','023',18.08662650,-67.14573470)
 ,(178,'Caguas','025',18.23879950,-66.03524900)
@@ -5379,7 +5379,7 @@ INSERT INTO "State"(CountryId,Name,StateCode,Latitude,Longitude) VALUES
 ,(157,'Loyalty Islands Province','03',-20.96670000,167.23330000);
  
 
-INSERT INTO "Address"(Address1, Address2, City, PostalCode, CountryId, StateId) VALUES
+INSERT INTO "Address"("Address1", "Address2", "City", "PostalCode", "CountryId", "StateId") VALUES
  ('2421 E Irwin St', null, 'Pierre', 57501, 233, 1391)
 ,('1451 Stadium Rd', null, 'Brookings', 57006, 233, 1391)
 ,('1601 University Blvd', null, 'Brookings', 57006, 233, 1391)
@@ -5389,11 +5389,11 @@ INSERT INTO "Address"(Address1, Address2, City, PostalCode, CountryId, StateId) 
 ,('205 E 6th St', null, 'Sioux Falls', 57104, 233, 1391);
  
 
-INSERT INTO "User"(AddressId, Title, FirstName, LastName, Email, PhoneNumber, Description) VALUES
+INSERT INTO "User"("AddressId", "Title", "FirstName", "LastName", "Email", "PhoneNumber", "Description") VALUES
  (1, 'Software Developer', 'Moe', 'Ayoub', 'mma.ayoub@outlook.com', '+16057405024', 'As a Software Developer at Raven Industries, I was the product owner and main contributor to our E-Commerce web site for the Agricultural Division. I also integrated our web site, CRM, ERP, and IT ticketing systems using various technologies, such as C#, Azure, Boomi, and Oracle. I graduated from South Dakota State University with a BSEE degree in 2020, where I designed and built a device that can reconfigure the network settings of display controllers for Daktronics. I have a strong background in electrical and electronics engineering, as well as object-oriented programming and web development. I am passionate about creating innovative and user-friendly solutions that enhance the performance and efficiency of complex systems.');
 
 
-INSERT INTO "WorkExperience"(UserId, AddressId, Employer, Title, StartDate, EndDate, PayRate) VALUES
+INSERT INTO "WorkExperience"("UserId", "AddressId", "Employer", "Title", "StartDate", "EndDate", "PayRate") VALUES
  (1, 3, 'SDSU Performing Arts Center', 'Technician', '2017-09-01', '2018-05-01', 10)
 ,(1, 4, 'Sencore Inc.', 'Application Engineer Intern', '2018-05-01', '2019-08-30', 18)
 ,(1, 5, 'Daktronics', 'Senior Student Engineer', '2019-08-01', '2020-05-01', 0)
@@ -5401,7 +5401,7 @@ INSERT INTO "WorkExperience"(UserId, AddressId, Employer, Title, StartDate, EndD
 ,(1, 7, 'Raven Industries Inc.', 'IT Software Developer', '2020-10-01', '2023-09-30', 38.9);
 
 
-INSERT INTO "WorkExperienceItem"(WorkExperienceId, Description) VALUES
+INSERT INTO "WorkExperienceItem"("WorkExperienceId", "Description") VALUES
  (1, 'Responsible for running wires to the stage speakers and setting up the lighting system')
 ,(1, 'Troubleshooting defective equipment during live performances')
 ,(2, 'Led the software and hardware testing for Sencore and WELLAV products to ensure products met or exceeded specifications')
@@ -5424,15 +5424,15 @@ INSERT INTO "WorkExperienceItem"(WorkExperienceId, Description) VALUES
 ,(5, 'Integrated our IT ticketing system (Ivanti) with Azure DevOps by building a .NET 6 console app')
 ,(5, 'Developed Salesforce LWC, Aura, and APEX classes to enhance Raven’s business processes');
 
-INSERT INTO "Education" (UserId, AddressId, School, StartDate, EndDate, Grade) VALUES
+INSERT INTO "Education" ("UserId", "AddressId", "School", "StartDate", "EndDate", "Grade") VALUES
  (1, 2, 'South Dakota State University', '2015-08-01', '2020-05-01', 'GPA 3.2');
 
-INSERT INTO "EducationItem" (EducationId, Name) VALUES
+INSERT INTO "EducationItem" ("EducationId", "Name") VALUES
  (1, 'Bachelor''s Degree in Electrical Engineering')
 ,(1, 'Computer Science Minor')
 ,(1, 'Mathematics Minor');
 
-INSERT INTO "Skill" (UserId, Type, Name) VALUES
+INSERT INTO "Skill" ("UserId", "Type", "Name") VALUES
  (1, 'Tools', 'Azure')
 ,(1, 'Tools', 'Azure DevOps')
 ,(1, 'Tools', 'Git')
@@ -5463,7 +5463,7 @@ INSERT INTO "Skill" (UserId, Type, Name) VALUES
 ,(1, 'ERP/CRM Platforms', 'Salesforce')
 ,(1, 'ERP/CRM Platforms', 'IFS');
 
-INSERT INTO "Certificate"(UserId, Name, CertificateId, URL, IssuedBy, IssueDate) VALUES
+INSERT INTO "Certificate"("UserId", "Name", "CertificateId", "URL", "IssuedBy", "IssueDate") VALUES
  (1, 'Associate Integration Developer', null, null, 'Boomi', '2023-04-24')
 ,(1, 'C# (Basic) Certificate', 'ad114b85f783', 'https://www.hackerrank.com/certificates/ad114b85f783', 'HackerRank', '2023-10-21')
 ,(1, 'Java (Basic) Certificate', '20944cfdc173', 'https://www.hackerrank.com/certificates/20944cfdc173', 'HackerRank', '2023-10-20')
@@ -5473,7 +5473,7 @@ INSERT INTO "Certificate"(UserId, Name, CertificateId, URL, IssuedBy, IssueDate)
 ,(1, 'SQL (Intermediate) Certificate', '103c2ddab89c', 'https://www.hackerrank.com/certificates/103c2ddab89c', 'HackerRank', '2023-10-26')
 ,(1, 'SQL (Basic) Certificate', '623eda7d84dd', 'https://www.hackerrank.com/certificates/623eda7d84dd', 'HackerRank', '2023-10-26');
 
-INSERT INTO "Link"(UserId, Name, URL) VALUES
+INSERT INTO "Link"("UserId", "Name", "URL") VALUES
  (1, 'LinkedIn', 'https://www.linkedin.com/in/mhayoub/')
 ,(1, 'GitHub', 'https://github.com/thelegend107')
 ,(1, 'Salesforce', 'https://www.salesforce.com/trailblazer/thelegend107')
