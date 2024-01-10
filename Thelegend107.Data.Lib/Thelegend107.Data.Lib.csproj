@@ -14,7 +14,7 @@
     <Copyright>Copyright (c) $([System.DateTime]::Now.Year), Moe Ayoub</Copyright>
     <IncludeSymbols>False</IncludeSymbols>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Packages</RepositoryUrl>
+    <RepositoryUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-NuGet-Package</RepositoryUrl>
     <PackageProjectUrl>https://github.com/thelegend107/Thelegend107.Data.Lib-Nuget-Package</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>

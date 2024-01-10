@@ -1,8 +1,5 @@
 # TheLegend107 Data Library NuGet Package
-## SQL Data Library
-This library will be used to mainly query the **Datawarehouse** database hosted in Azure. Azure hosts it for free for about 12 months. The free for life version has limited vCores.
-## MySQL Data Library
-This library will be used for CRUD operations on the **Datawarehouse** database which is in the process of being migrated to Oracle's MySQL which is free to up to 5MB of data.
+This library will be used for CRUD operations on the **Datawarehouse**. Compataible with SQL Server and Postgre SQL.
 
 ## Library Current Usage
 These libraries will be used for the following projects:
