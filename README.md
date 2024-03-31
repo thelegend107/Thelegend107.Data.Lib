@@ -5,5 +5,3 @@ This library will be used for CRUD operations on the **Datawarehouse**. Compatai
 These libraries will be used for the following projects:
 > https://github.com/thelegend107/ResumeWebsite
 - https://resume.thelegend107.com
-> https://github.com/thelegend107/fakeStore
-- https://fakestore.thelegend107.com
